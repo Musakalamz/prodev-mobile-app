@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, TextInput, Pressable, Image } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+} from "react-native";
 import { Link } from "expo-router";
 import { styles as joinStyles } from "../styles/_joinstyle";
 import { GOOGLELOGO, FACEBOOKLOGO } from "../constants";
 
-export default function Join() {
-  const [fullName, setFullName] = useState("");
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,21 +23,13 @@ export default function Join() {
       </View>
 
       <View style={joinStyles.titleTextGroup}>
-        <Text style={joinStyles.titleText}>Join now</Text>
-        <Text style={joinStyles.subText}>Create your account to get started.</Text>
+        <Text style={joinStyles.titleText}>Sign in</Text>
+        <Text style={joinStyles.subText}>
+          Access your account and continue learning.
+        </Text>
       </View>
 
       <View style={joinStyles.formGroup}>
-        <View>
-          <Text style={joinStyles.formLabel}>Full Name</Text>
-          <TextInput
-            value={fullName}
-            onChangeText={setFullName}
-            style={joinStyles.formControl}
-            placeholder="Jane Doe"
-          />
-        </View>
-
         <View>
           <Text style={joinStyles.formLabel}>Email</Text>
           <TextInput
@@ -57,8 +55,10 @@ export default function Join() {
           </View>
         </View>
 
+        <Text style={joinStyles.forgotPasswordText}>Forgot password?</Text>
+
         <Pressable style={joinStyles.primaryButton}>
-          <Text style={joinStyles.buttonText}>Create Account</Text>
+          <Text style={joinStyles.buttonText}>Sign In</Text>
         </Pressable>
       </View>
 
@@ -71,20 +71,24 @@ export default function Join() {
       <View style={joinStyles.secondaryButtonGroup}>
         <Pressable style={joinStyles.secondaryButton}>
           <Image source={GOOGLELOGO} />
-          <Text style={joinStyles.secondaryButtonText}>Continue with Google</Text>
+          <Text style={joinStyles.secondaryButtonText}>
+            Continue with Google
+          </Text>
         </Pressable>
 
         <Pressable style={joinStyles.secondaryButton}>
           <Image source={FACEBOOKLOGO} />
-          <Text style={joinStyles.secondaryButtonText}>Continue with Facebook</Text>
+          <Text style={joinStyles.secondaryButtonText}>
+            Continue with Facebook
+          </Text>
         </Pressable>
       </View>
 
       <View style={joinStyles.signupgroup}>
-        <Text style={joinStyles.signupTitleText}>Already have an account? </Text>
-        <Link href="/signin" asChild>
+        <Text style={joinStyles.signupTitleText}>Don’t have an account? </Text>
+        <Link href="/join" asChild>
           <Pressable>
-            <Text style={joinStyles.signupSubTitleText}>Sign in</Text>
+            <Text style={joinStyles.signupSubTitleText}>Join Now</Text>
           </Pressable>
         </Link>
       </View>
