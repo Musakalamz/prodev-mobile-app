@@ -1,51 +1,126 @@
-import React from "react";
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import {
-  SafeAreaView,
-  View,
-  Text,
   ImageBackground,
+  Dimensions,
+  StyleSheet,
   Image,
-  Pressable,
-} from "react-native";
-import { Link } from "expo-router";
-import { styles as mainStyles } from "../styles/_mainstyle";
-import { BACKGROUNDIMAGE, HEROLOGO } from "../constants";
+  TouchableOpacity,
+  Text,
+  View,
+} from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function Index() {
+  const router = useRouter();
   return (
-    <SafeAreaView style={mainStyles.container}>
-      <ImageBackground
-        source={BACKGROUNDIMAGE}
-        resizeMode="cover"
-        style={mainStyles.backgroundImageContainer}
-      >
-        <View style={mainStyles.logoContainer}>
-          <Image source={HEROLOGO} />
-        </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ImageBackground
+          source={require('@/assets/images/hero-icon.png')}
+          style={styles.background}
+          resizeMode='cover'
+        >
+          <View style={styles.container}>
+            <View style={styles.companyLogo}>
+              <Image source={require('@/assets/images/logo.png')} />
+            </View>
 
-        <View style={mainStyles.titleContainer}>
-          <Text style={mainStyles.titleText}>Together We Create</Text>
-          <View style={mainStyles.titleSubTextContainer}>
-            <Text style={mainStyles.titleSubText}>
-              Welcome to ProDev — collaborate and grow your skills.
-            </Text>
+            {/*prettier-ignore */}
+            <View style={styles.textGroup}>
+              <Text style={styles.textLarge}>Find your favorite place here</Text>
+              <Text style={styles.textSmall}>The best prices for over 2 </Text>
+              <Text style={styles.textSmall}>million properties worldwide</Text>
+            </View>
+            <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+              <View style={styles.buttonGroup}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => router.push('/join')}
+                >
+                  <Text style={{ ...styles.textSmall, color: 'black' }}>
+                    Join here
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.transparentButton}
+                  onPress={() => router.push('/signin')}
+                >
+                  <Text style={styles.textSmall}>Sign In</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{ alignItems: 'center', paddingVertical: 20 }}>
+                <Text
+                  onPress={() => router.push('/(home)')}
+                  style={{ color: 'white' }}
+                >
+                  Continue to home
+                </Text>
+              </View>
+            </View>
           </View>
-        </View>
-
-        <View style={mainStyles.buttonGroup}>
-          <Link href="/join" asChild>
-            <Pressable style={mainStyles.buttonPrimary}>
-              <Text style={mainStyles.buttonPrimaryText}>Join Now</Text>
-            </Pressable>
-          </Link>
-
-          <Link href="/signin" asChild>
-            <Pressable style={mainStyles.buttonSecondary}>
-              <Text style={mainStyles.buttonSecondaryText}>Sign In</Text>
-            </Pressable>
-          </Link>
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
+        </ImageBackground>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
+    height: Dimensions.get('window').height,
+  },
+  companyLogo: {
+    width: '100%',
+    alignItems: 'center',
+    padding: 20,
+    marginBottom: 50,
+  },
+  textGroup: {
+    alignItems: 'center',
+  },
+  textLarge: {
+    color: 'white',
+    fontWeight: '800',
+    fontSize: 40,
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  textSmall: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '200',
+    textAlign: 'center',
+  },
+  transparentButton: {
+    borderColor: 'white',
+    borderWidth: 2,
+    borderRadius: 40,
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    fontSize: 20,
+    flex: 1,
+  },
+  button: {
+    borderColor: 'white',
+    borderWidth: 2,
+    borderRadius: 40,
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    fontSize: 20,
+    backgroundColor: 'white',
+    flex: 1,
+  },
+  buttonGroup: {
+    flexDirection: 'row',
+    gap: 20,
+    paddingHorizontal: 20,
+  },
+});

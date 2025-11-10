@@ -1,6 +1,6 @@
-import PropertyListing from "@/components/PropertyListing.tsx";
-import { styles } from "@/styles/_homestyle";
-import { Feather } from "@expo/vector-icons";
+import PropertyListing from '@/components/PropertyListing';
+import { styles } from '@/styles/_homestyle';
+import { Feather } from '@expo/vector-icons';
 import {
   View,
   Text,
@@ -9,8 +9,8 @@ import {
   ScrollView,
   Dimensions,
   TouchableHighlight,
-} from "react-native";
-import { FILTERS, SAMPLE_DATA } from "@/constants/data";
+} from 'react-native';
+import { SAMPLE_DATA, FILTERS } from '@/constants/data';
 
 const Home = () => {
   return (
@@ -21,11 +21,11 @@ const Home = () => {
             <Text style={styles.searchFormText}>Where to?</Text>
             <TextInput
               style={{ ...styles.searchControl, ...styles.searchFormText }}
-              placeholder="Location . Date . Add guest"
+              placeholder='Location . Date . Add guest'
             />
           </View>
           <View style={styles.searchButton}>
-            <Feather name="search" size={24} color="white" />
+            <Feather name='search' size={24} color='white' />
           </View>
         </View>
       </View>
@@ -33,7 +33,7 @@ const Home = () => {
       <View
         style={{
           height: 72,
-          backgroundColor: "white",
+          backgroundColor: 'white',
         }}
       >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -44,8 +44,8 @@ const Home = () => {
                   style={{
                     flex: 1,
                   }}
-                  source={require("@/assets/images/react-logo.png")}
-                  resizeMode="contain"
+                  source={require('@/assets/images/mansion.png')}
+                  resizeMode='contain'
                 />
                 <Text>{filter}</Text>
               </View>

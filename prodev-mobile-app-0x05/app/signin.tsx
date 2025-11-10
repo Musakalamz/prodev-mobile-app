@@ -1,97 +1,90 @@
-import React, { useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  Image,
-} from "react-native";
-import { Link } from "expo-router";
-import { styles as joinStyles } from "../styles/_joinstyle";
-import { GOOGLELOGO, FACEBOOKLOGO } from "../constants";
+import { Text, TextInput, View, TouchableOpacity, Image } from 'react-native';
+import { styles } from '@/styles/_mainstyle';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+export default function Index() {
+  const router = useRouter();
   return (
-    <SafeAreaView style={joinStyles.container}>
-      <View style={joinStyles.iconsection}>
-        <Image source={GOOGLELOGO} />
-        <Image source={FACEBOOKLOGO} />
-      </View>
-
-      <View style={joinStyles.titleTextGroup}>
-        <Text style={joinStyles.titleText}>Sign in</Text>
-        <Text style={joinStyles.subText}>
-          Access your account and continue learning.
-        </Text>
-      </View>
-
-      <View style={joinStyles.formGroup}>
-        <View>
-          <Text style={joinStyles.formLabel}>Email</Text>
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            style={joinStyles.formControl}
-            placeholder="you@example.com"
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.navGroup}>
+          <Ionicons
+            name='arrow-back'
+            size={25}
+            onPress={() => router.push('/')}
           />
+          <Image source={require('@/assets/images/logo-green.png')} />
         </View>
+        <Text style={styles.largeText}>Sign in to your</Text>
+        <Text style={styles.largeText}>Account</Text>
+        <Text style={styles.smallText}>
+          Enter your email and password to sign in.
+        </Text>
 
-        <View>
-          <Text style={joinStyles.formLabel}>Password</Text>
-          <View style={joinStyles.formPasswordControl}>
-            <TextInput
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              style={joinStyles.passwordControl}
-              placeholder="••••••••"
-            />
+        <View style={styles.formGroup}>
+          <View>
+            <Text style={styles.placeholderText}>Email</Text>
+            <TextInput keyboardType='email-address' style={styles.inputField} />
           </View>
+          <View style={{ marginTop: 20 }}>
+            <Text style={styles.placeholderText}>Password</Text>
+            <View style={styles.passwordGroup}>
+              <TextInput style={{ flex: 1 }} />
+              <FontAwesome name='eye-slash' size={24} color='#7E7B7B' />
+            </View>
+          </View>
+          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </View>
 
-        <Text style={joinStyles.forgotPasswordText}>Forgot password?</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Sign in</Text>
+        </TouchableOpacity>
 
-        <Pressable style={joinStyles.primaryButton}>
-          <Text style={joinStyles.buttonText}>Sign In</Text>
-        </Pressable>
-      </View>
+        <View style={styles.dividerGroup}>
+          <View style={styles.divider}></View>
+          <Text style={styles.dividerText}>OR</Text>
+          <View style={styles.divider}></View>
+        </View>
 
-      <View style={joinStyles.dividerGroup}>
-        <View style={joinStyles.divider} />
-        <Text style={joinStyles.dividerText}>OR</Text>
-        <View style={joinStyles.divider} />
-      </View>
+        <View style={styles.socialMediaButtonGroup}>
+          <TouchableOpacity style={styles.socialMediaButton}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 5,
+              }}
+            >
+              <Image source={require('@/assets/images/google.png')} />
+              <Text style={styles.socialMediaButtonText}>
+                Continue with Google
+              </Text>
+            </View>
+          </TouchableOpacity>
 
-      <View style={joinStyles.secondaryButtonGroup}>
-        <Pressable style={joinStyles.secondaryButton}>
-          <Image source={GOOGLELOGO} />
-          <Text style={joinStyles.secondaryButtonText}>
-            Continue with Google
-          </Text>
-        </Pressable>
+          <TouchableOpacity style={styles.socialMediaButton}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 5,
+              }}
+            >
+              <Image source={require('@/assets/images/facebook.png')} />
+              <Text style={styles.socialMediaButtonText}>
+                Continue with Facebook
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-        <Pressable style={joinStyles.secondaryButton}>
-          <Image source={FACEBOOKLOGO} />
-          <Text style={joinStyles.secondaryButtonText}>
-            Continue with Facebook
-          </Text>
-        </Pressable>
-      </View>
-
-      <View style={joinStyles.signupgroup}>
-        <Text style={joinStyles.signupTitleText}>Don’t have an account? </Text>
-        <Link href="/join" asChild>
-          <Pressable>
-            <Text style={joinStyles.signupSubTitleText}>Join Now</Text>
-          </Pressable>
-        </Link>
-      </View>
-    </SafeAreaView>
+        <View style={styles.subTextGroup}>
+          <Text style={styles.subText}>Don't have an account?</Text>
+          <Text style={styles.subTextJoin}>Join now</Text>
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
